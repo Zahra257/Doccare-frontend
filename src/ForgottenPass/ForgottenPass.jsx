@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { Link } from 'react-router-dom';
 import logo from './logo.png';
 
 
@@ -17,7 +18,7 @@ const ForgottenPass = () => {
                       <h2 class="title">Mot de passe oublié</h2>
                       <div class="input-field" id="sign">
                         <i class="fas fa-user-alt"></i>
-                          <input type="text" placeholder="Email"/>
+                          <input type="text" placeholder="Nom d'utilisateur"/>
                       </div>
                      
                     <input type="submit" value="Login" class="btn solid" onClick = { ()=>
@@ -26,7 +27,7 @@ const ForgottenPass = () => {
                             
                      }/>
 
-                     <p class="social-text">If you have an account <a href="#" id="sign-up-btn" >Sign in</a></p>
+                     <p class="social-text">If you have an account <Link to = "/"><a href="#" id="sign-up-btn" >Sign in</a></Link></p>
                      <div class="social-media">
                         
                      </div>
