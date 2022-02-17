@@ -1,6 +1,7 @@
 import React from 'react'
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import ForgottenPass from '../ForgottenPass/ForgottenPass'
+import Resetpass from '../Resetpass/Resetpass'
 import SignIn from '../Signin/Signin'
 
 const AppRoutes = () => {
@@ -11,6 +12,7 @@ const AppRoutes = () => {
       
     <Route path ="/" element={<SignIn/>}/>
       <Route path ="/ForgottenPassword" element={<ForgottenPass/>}/>
+      <Route path ="/Resetpassword" element={<Resetpass/>}/>
 
     </Routes>
     

@@ -1,6 +1,9 @@
 import React, {useState} from 'react'
 import { Link } from 'react-router-dom';
 import logo from './logo.png';
+import './ForgottenPass.css'
+
+
 
 
 const ForgottenPass = () => {
@@ -10,53 +13,55 @@ const ForgottenPass = () => {
   return (
     <div>
 
-<div className = {`container ${Classe}`}>
-        <div class="forms-container">
+<div className = {`pass-container ${Classe}`}>
+        <div class="pass-forms-container">
           
-              <div className="signin-signup">
-                  <form action="" className = "sign-in-form">
-                      <h2 class="title">Mot de passe oublié</h2>
-                      <div class="input-field" id="sign">
+              <div className="pass-signin-signup">
+                  <form action="" className = "pass-sign-in-form">
+                      <h2 class="pass-title">Mot de passe oublié</h2>
+                      <div class="pass-input-field" id="sign">
                         <i class="fas fa-user-alt"></i>
                           <input type="text" placeholder="Nom d'utilisateur"/>
                       </div>
                      
-                    <input type="submit" value="Login" class="btn solid" onClick = { ()=>
+                    <input  type="button" value="Login" class="btn solid" onClick = { ()=>
                       
-                      SetClasse('sign-up-mode')
+                      SetClasse("pass-sign-up-mode")
                             
                      }/>
 
-                     <p class="social-text">If you have an account <Link to = "/"><a href="#" id="sign-up-btn" >Sign in</a></Link></p>
-                     <div class="social-media">
+                     <p class="pass-social-text">If you have an account <Link to = "/"><a href="#" id="sign-up-btn" >Sign in</a></Link></p>
+                     <div class="pass-social-media">
                         
                      </div>
                     </form>
 
-                    <form action="" class="sign-up-form">
-                       
+                    <form action="" class="pass-sign-up-form">
 
-                       <p class="social-text">Already have an account <a href="#" id="sign-in-btn" onClick ={
+                    <i class="fas fa-check-circle fa-5x"></i>
+                   
+
+                       <p class="response"> Nous vous avons envoyé un mail sur votre boite, merci de le verifier. <br/><br/> Cliquer ici pour revenir à <a href="#" id="sign-in-btn" onClick ={
 
                          ()=> SetClasse('')
 
-                       }>Sign in</a></p>
-                       <div class="social-media">
+                       }>la page d'acceuil</a></p>
+                       <div class="pass-social-media">
                            
                        </div>
                       </form>
 
               </div>
           
-            <div class="panels-container">
-                <div class="panel left-panel">
-                    <img src={logo} className="image" alt=""/>
+            <div class="pass-panels-container">
+                <div class="pass-panel pass-left-panel">
+                    <img src={logo} className="pass-image" alt=""/>
                 </div>
 
-                <div class="panel right-panel">
-                    <div class="content">
+                <div class="pass-panel pass-right-panel">
+                    <div class="pass-content">
 
-                        <img src={logo} class="image" alt=""/>
+                        <img src={logo} class="pass-image" alt=""/>
                 </div>
 
             </div>

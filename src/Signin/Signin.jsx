@@ -35,24 +35,24 @@ const SignIn = () => {
 
     // FirstName
     if (NewUser.nom.length < 4 || NewUser.nom.length > 20) {
-      return "<h1>firstname should contain from 4 to 20 caracters</h1>";
+      setErrorMsg("<h1>firstname should contain from 4 to 20 caracters</h1>");
     }
 
     //LastName
     if (NewUser.prenom.length < 4 || NewUser.prenom.length > 20) {
-      return "<h1>lastname should contain from 4 to 20 caracters</h1>";
+      setErrorMsg("<h1>lastname should contain from 4 to 20 caracters</h1>");
     }
 
     //LastName
     if (NewUser.login.length < 8) {
-      return "<h1>login should be more than 8 caracter</h1>";
+      setErrorMsg("<h1>login should be more than 8 caracter</h1>");
     }
 
     //PassWord
     let pattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,12}$/;
 
     if (pattern.test(NewUser.password) === false) {
-      return "<h1>The password should contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character</h1>";
+      setErrorMsg("<h1>The password should contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character</h1>");
     }
 
     //Username Email
@@ -60,13 +60,13 @@ const SignIn = () => {
       /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
 
     if (pattern_email.test(NewUser.email) === false) {
-      return "<h1>Email Should be like : Example@Example.com</h1>";
+      setErrorMsg("<h1>Email Should be like : Example@Example.com</h1>");
     }
 
     var pattern_tel = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
 
     if (pattern_tel.test(NewUser.tel) === false) {
-      return "<h1>You should enter a valide phone format</h1>";
+      setErrorMsg("<h1>You should enter a valide phone format</h1>");
     }
   };
 
@@ -78,12 +78,12 @@ const SignIn = () => {
     let pattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,12}$/;
 
     if (pattern.test(loginInfo.password) === false) {
-      return "<h1>The password should contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character</h1>";
+      setErrorMsg("<h1>The password should contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character</h1>");
     }
 
      //LastName
      if (loginInfo.log.length < 8) {
-      return "<h1>login should be more than 8 caracter</h1>";
+      setErrorMsg("<h1>login should be more than 8 caracter</h1>");
     }
 
     if(ErrorMsg === "") { Axios.post(`http://localhost:9000/api/Signin/${loginInfo.log}/pass/${loginInfo.password}`, loginInfo)
@@ -101,13 +101,20 @@ const SignIn = () => {
           <div className="signin-signup">
             <form action="" className="sign-in-form" onSubmit={loginvalidation}>
               <h2 class="title">Sign in</h2>
+
+              <div className={ErrorMsg == "" ? "d-none" : "alert alert-danger"}>
+
+                    {ErrorMsg}
+                    
+                    </div>
+
               <div class="input-field" id="sign">
                 <i class="fas fa-user-alt"></i>
-                <input type="text" placeholder="Username" name ='log' onChange={HandelInputChangeLogin}/>
+                <input type="text" placeholder="Username" name ='log' onFocus={()=>setErrorMsg("")} onChange={HandelInputChangeLogin}/>
               </div>
               <div class="input-field" id="sign">
                 <i class="fas fa-key"></i>
-                <input type="passworf" placeholder="Password" name="password" onChange={HandelInputChangeLogin}/>
+                <input type="passworf" placeholder="Password" name="password" onFocus={()=>setErrorMsg("")} onChange={HandelInputChangeLogin}/>
               </div>
               <Link to ="/ForgottenPassword"><p class="social-text forget" id="sign-in-btn">
                 
@@ -137,6 +144,7 @@ const SignIn = () => {
                   type="text"
                   placeholder="Nom"
                   name="nom"
+                  onFocus={()=>setErrorMsg("")}
                   onChange={HandelInputChange}
                 />
               </div>
@@ -147,6 +155,7 @@ const SignIn = () => {
                   type="text"
                   placeholder="Prénom"
                   name="prenom"
+                  onFocus={()=>setErrorMsg("")}
                   onChange={HandelInputChange}
                 />
               </div>
@@ -157,6 +166,7 @@ const SignIn = () => {
                   type="text"
                   placeholder="Spécialité"
                   name="specialite"
+                  onFocus={()=>setErrorMsg("")}
                   onChange={HandelInputChange}
                 />
               </div>
@@ -167,6 +177,7 @@ const SignIn = () => {
                   type="text"
                   placeholder="CIN"
                   name="CIN"
+                  onFocus={()=>setErrorMsg("")}
                   onChange={HandelInputChange}
                 />
               </div>
@@ -177,6 +188,7 @@ const SignIn = () => {
                   type="text"
                   placeholder="Adresse"
                   name="adresse"
+                  onFocus={()=>setErrorMsg("")}
                   onChange={HandelInputChange}
                 />
               </div>
@@ -187,6 +199,7 @@ const SignIn = () => {
                   type="text"
                   placeholder="Tel du cabinet"
                   name="Tel"
+                  onFocus={()=>setErrorMsg("")}
                   onChange={HandelInputChange}
                 />
               </div>
@@ -197,6 +210,7 @@ const SignIn = () => {
                   type="email"
                   placeholder="Email du cabinet"
                   name="email"
+                  onFocus={()=>setErrorMsg("")}
                   onChange={HandelInputChange}
                 />
               </div>
@@ -207,6 +221,7 @@ const SignIn = () => {
                   type="text"
                   placeholder="Login"
                   name="login"
+                  onFocus={()=>setErrorMsg("")}
                   onChange={HandelInputChange}
                 />
               </div>
@@ -217,6 +232,7 @@ const SignIn = () => {
                   type="password"
                   placeholder="Mot de passe"
                   name="password"
+                  onFocus={()=>setErrorMsg("")}
                   onChange={HandelInputChange}
                 />
               </div>
