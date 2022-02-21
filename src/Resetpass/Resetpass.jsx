@@ -1,18 +1,67 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "./logo.png";
 import { Link } from "react-router-dom";
+import pass from "../Modals/Pass";
+import verifInfo from "../Modals/VerifInfo";
+import  Axios from 'axios';
 
 const Resetpass = () => {
+
+
+
+  const [info, SetInfo] = useState(new verifInfo());
+
+  useEffect(() => {
+    
+        let lin = window.location.href.split('/')
+        console.log(lin)
+        SetInfo({login: lin[4], token : lin[6]})
+
+}, [])
+
   const [Classe, SetClasse] = useState("");
 
   const [ErrorMsg, setErrorMsg] = useState("");
+
+  // state for password information
+
+  const [passinfo, setPassinfo] = useState(new pass());
+
+  const Handlechange = (event) =>{
+
+    setPassinfo({ ...passinfo, [event.target.name]: event.target.value });
+
+
+  }
+
+  const validation = (e) =>{
+
+    e.preventDefault();
+ 
+    //PassWord
+    let pattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,12}$/;
+
+    if (pattern.test(passinfo.password) === false) {
+      setErrorMsg("<h1>The password should contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character</h1>");
+    }
+
+    if(passinfo.password !== passinfo.passwordconfirm)
+    
+    setErrorMsg("<h1>Les deux mots de passe doivent être identiques </h1>");
+   
+    if(ErrorMsg === "") { Axios.post(`http://localhost:9000/api/resetpassword/${info.login}/code/${info.token}`, passinfo)
+    .then(data => console.log(data))
+    .catch(err => setErrorMsg(err?.response?.data?.message))
+}
+
+  }
 
   return (
     <div>
       <div className={`container ${Classe}`}>
         <div class="forms-container">
           <div className="signin-signup">
-            <form action="" className="sign-in-form">
+            <form action="" className="sign-in-form" onSubmit={validation}>
               <h2 class="title">Changer votre mot de passe</h2>
 
               <div className={ErrorMsg == "" ? "d-none" : "alert alert-danger"}>
@@ -24,20 +73,22 @@ const Resetpass = () => {
                 <input
                   type="password"
                   placeholder="Mot de passe"
-                  name="Password"
+                  name="password"
                   onFocus={() => setErrorMsg("")}
+                  onChange={Handlechange}
                 />
               </div>
               <div class="input-field" id="sign">
                 <i class="fas fa-user-alt"></i>
                 <input
-                  type="passwor"
+                  type="password"
                   placeholder="confirmer le mot de passe"
-                  name="Passwordconfirm"
+                  name="passwordconfirm"
                   onFocus={() => setErrorMsg("")}
+                  onChange={Handlechange}
                 />
               </div>
-              <input type="button" value="Submit" class="btn solid" onClick = { ()=>
+              <input type="submit" value="Submit" class="btn solid" onClick = { ()=>
                       
                       SetClasse("sign-up-mode") }/>
               <p class="social-text">

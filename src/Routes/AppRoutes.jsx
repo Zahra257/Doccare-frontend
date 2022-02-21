@@ -12,7 +12,7 @@ const AppRoutes = () => {
       
     <Route path ="/" element={<SignIn/>}/>
       <Route path ="/ForgottenPassword" element={<ForgottenPass/>}/>
-      <Route path ="/Resetpassword" element={<Resetpass/>}/>
+      <Route path ="/Resetpassword/:login/code/:token" element={<Resetpass/>}/>
 
     </Routes>
     

@@ -14,7 +14,7 @@ const SignIn = () => {
   // state pour user infos
   const [NewUser, setNewUser] = useState(new User());
 
-  //state for erreurs
+  //state for errors
   const [ErrorMsg, setErrorMsg] = useState("");
 
   // state for login infos
@@ -70,6 +70,7 @@ const SignIn = () => {
     }
   };
 
+  
   const loginvalidation = (e) => {
 
      e.preventDefault();
@@ -87,8 +88,8 @@ const SignIn = () => {
     }
 
     if(ErrorMsg === "") { Axios.post(`http://localhost:9000/api/Signin/${loginInfo.log}/pass/${loginInfo.password}`, loginInfo)
-          .then(data => console.log(data))
-          .catch(err => console.log(err))
+          .then(response => setErrorMsg(response.data.message))
+          .catch(err => setErrorMsg(err?.response?.data?.message))
     }
 
   }
@@ -114,7 +115,7 @@ const SignIn = () => {
               </div>
               <div class="input-field" id="sign">
                 <i class="fas fa-key"></i>
-                <input type="passworf" placeholder="Password" name="password" onFocus={()=>setErrorMsg("")} onChange={HandelInputChangeLogin}/>
+                <input type="password" placeholder="Password" name="password" onFocus={()=>setErrorMsg("")} onChange={HandelInputChangeLogin}/>
               </div>
               <Link to ="/ForgottenPassword"><p class="social-text forget" id="sign-in-btn">
                 
@@ -127,7 +128,10 @@ const SignIn = () => {
                 <a
                   href="#"
                   id="sign-up-btn"
-                  onClick={() => SetClasse("sign-up-mode")}
+                  onClick={() => {
+                    SetClasse("sign-up-mode")
+                  }
+                  }
                 >
                   Sign up
                 </a>
@@ -238,7 +242,7 @@ const SignIn = () => {
               </div>
 
               <input
-                type="submit"
+                type="Submit"
                 value="Sign up"
                 class="btn solid"
                 onClick={() => {
@@ -257,7 +261,11 @@ const SignIn = () => {
 
               <p class="social-text">
                 Already have an account{" "}
-                <a href="#" id="sign-in-btn" onClick={() => SetClasse("")}>
+                <a href="#" id="sign-in-btn" onClick={() => {
+                  if(ErrorMsg === '')
+                  SetClasse("")
+                }
+                  }>
                   Sign in
                 </a>
               </p>
