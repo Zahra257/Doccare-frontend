@@ -19,8 +19,8 @@ const ForgottenPass = () => {
      let msg = ""
     //Login
     if (Login.length < 8) {
-      setErrorMsg("<h1>login should be more than 8 caracter</h1>");
-      msg = "<h1>login should be more than 8 caracter</h1>"
+      setErrorMsg("login doit contenir plus de 8 caractéres");
+      msg = "login doit contenir plus de 8 caractéres"
       SetClasse("")
     }
 
@@ -48,7 +48,7 @@ const ForgottenPass = () => {
               <h2 class="pass-title">Mot de passe oublié</h2>
 
               <div className={ErrorMsg == "" ? "d-none" : "alert alert-danger"}>
-                {ErrorMsg}
+              <span style={{color : "rgb(190, 50, 50)"}}>{ErrorMsg}</span>
               </div>
 
               <div class="pass-input-field" id="sign">

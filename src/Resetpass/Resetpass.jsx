@@ -42,12 +42,12 @@ const Resetpass = () => {
     let pattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,12}$/;
 
     if (pattern.test(passinfo.password) === false) {
-      setErrorMsg("<h1>The password should contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character</h1>");
+      setErrorMsg("Le mot de passe doit contenir au moin 8 caractéres, une lettre majiscule, une miniscule, un nombre et un caractére spécial");
     }
 
     if(passinfo.password !== passinfo.passwordconfirm)
     
-    setErrorMsg("<h1>Les deux mots de passe doivent être identiques </h1>");
+    setErrorMsg("Les deux mots de passe doivent être identiques");
    
     if(ErrorMsg === "") { Axios.post(`http://localhost:9000/api/resetpassword/${info.login}/code/${info.token}`, passinfo)
     .then(data => console.log(data))
@@ -65,7 +65,7 @@ const Resetpass = () => {
               <h2 class="title">Changer votre mot de passe</h2>
 
               <div className={ErrorMsg == "" ? "d-none" : "alert alert-danger"}>
-                {ErrorMsg}
+              <span style={{color : "rgb(190, 50, 50)"}}>{ErrorMsg}</span>
               </div>
 
               <div class="input-field" id="sign">
