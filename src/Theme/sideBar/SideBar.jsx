@@ -4,7 +4,7 @@ const SideBar = () => {
 
   return <div>
 
-    <div class="navigation">
+    <div class="Dashnavigation">
         <ul>
             <li>
                 <a href="#">
@@ -53,7 +53,7 @@ const SideBar = () => {
             <li>
                 <a href="#">
                     <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
-                    <span class="title">Sign out</span>
+                    <span class="Sidetitle">Sign out</span>
                 </a>
             </li>
             

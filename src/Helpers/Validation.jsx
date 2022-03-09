@@ -1,50 +1,63 @@
-export default validation = (e) =>{
+export const Uservalidation = (e) =>{
 
-    e.preventDefault()
-
-    // FirstName
-    if (Doctor.nom.length < 4 || Doctor.nom.length > 20) {
-        return "<h1>firstname should contain from 4 to 20 caracters</h1>"
-      }
+  // FirstName
+  if (NewUser.nom.length < 4 || NewUser.nom.length > 20) {
+    return "le nom doit contenir entre 4 et 20 caractéres";
   
-      //LastName
-      if (Doctor.prénom.length < 4 || Doctor.prénom.length > 20) {
-        return "<h1>lastname should contain from 4 to 20 caracters</h1>"
-        
-      }
+  }
 
-       //LastName
-       if (Account.login.length < 8 ) {
-        return "<h1>login should be more than 8 caracter</h1>"
-        
-        }
+  //LastName
+  if (NewUser.prenom.length < 4 || NewUser.prenom.length > 20) {
+    return "le prénom doit contenir entre 4 et 20 caractéres";
+  }
 
-      //PassWord
-      let pattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,12}$/
-  
-      if ( pattern.test(Account.password) === false ) {
-          
-        return "<h1>The password should contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character</h1>"
-        
-      }
-  
-      //Username Email
-      let pattern_email = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/
-  
-     if ( pattern_email.test(Cabinet.email) === false  ) {
-          
-            return "<h1>Email Should be like : Example@Example.com</h1>"
-        
-      }
+  //LastName
+  if (NewUser.login.length < 8) {
+    return "login doit contenir plus de 8 caractéres";  
+  }
 
-      var pattern_tel = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{3})$/;
-      
-      if ( pattern_tel.test(Cabinet.tel) === false  ) {
-          
-        return "<h1>You should enter a valide phone format</h1>"
-    
-      }
+  //PassWord
+  let pattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,12}$/;
 
+  if (pattern.test(NewUser.password) === false) {
+    return
+      "Le mot de passe doit contenir au moin 8 caractéres, une lettre majiscule, une miniscule, un nombre et un caractére spécial";
+    }
 
+  //Username Email
+  let pattern_email =
+    /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+
+  if (pattern_email.test(NewUser.email) === false) {
+    return "Email doit être commz suit : Example@Example.com";
+  }
+
+  var pattern_tel = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+
+  if (pattern_tel.test(NewUser.tel) === false) {
+    return "Vous devez entrer un numero de téléphone valide";
+  }
+
+};
+
+export const loginvalidation = (username, password) => {
+
+  if(username === "" || password === ""){
+
+    return " vous devez donner des informations valide"
+  }
+
+   //LastName
+   if (username.length < 8) {
+    return "login doit contenir plus de 8 caractéres";
+  }
+
+  //PassWord
+  let pattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,12}$/;
+
+  if (pattern.test(password) === false) {
+   return
+      "Le mot de passe doit contenir au moin 8 caractéres, une lettre majiscule, une miniscule, un nombre et un caractére spécial";
+    }
 
 }

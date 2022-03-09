@@ -1,4 +1,4 @@
-class login {
+class loginCredentials {
 
     constructor(log = '', password=''){
      
@@ -8,4 +8,4 @@ class login {
     }
 }
 
-export default login;
+export default loginCredentials;

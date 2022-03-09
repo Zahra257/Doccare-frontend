@@ -18,12 +18,12 @@ body{
    overflow-x: hidden; 
 }
 
-.container{
+.Dashcontainer{
     position: relative;
     width: 100%;
 }
 
-.navigation{
+.Dashnavigation{
     position: fixed;
     width: 220px;
     height: 100%;
@@ -34,7 +34,7 @@ body{
 
 }
 
-.logo{
+.Dashlogo{
 
     width: 33px;
     height: 25px;
@@ -43,7 +43,7 @@ body{
     right: 0;
 }
 
-.text{
+.Dashtext{
 
     width: 130px;
     height: 40px;
@@ -52,13 +52,13 @@ body{
 }
 
 
-.navigation.active{
+.Dashnavigation.active{
 
     width: 70px;
 
 }
 
-.navigation ul{
+.Dashnavigation ul{
 
     position: absolute;
     top: 0;
@@ -66,7 +66,7 @@ body{
     width : 100%;
 }
 
-.navigation ul li {
+.Dashnavigation ul li {
 
     position: relative;
     width: 100%;
@@ -80,15 +80,15 @@ body{
 
 }
 
-.navigation ul li:hover,
-.navigation ul li.hovered
+.Dashnavigation ul li:hover,
+.Dashnavigation ul li.hovered
 {
 
     background: var(--white);
 
 }
 
-.navigation ul li:nth-child(1){
+.Dashnavigation ul li:nth-child(1){
 
     margin-bottom: 20px;
     pointer-events: none;
@@ -102,7 +102,7 @@ body{
 
 
 
-.navigation ul li a {
+.Dashnavigation ul li a {
 
     position: relative;
     display: block;
@@ -112,14 +112,14 @@ body{
     color: var(--white);
 
 }
-.navigation ul li:hover a,
-.navigation ul li.hovered a{
+.Dashnavigation ul li:hover a,
+.Dashnavigation ul li.hovered a{
 
     color : var(--blue);
 
 }
 
-.navigation ul li a .icon{
+.Dashnavigation ul li a .icon{
 
     position: relative;
     display: block;
@@ -132,12 +132,12 @@ body{
 
 
 
-.navigation ul li a .icon ion-icon{
+.Dashnavigation ul li a .icon ion-icon{
 
     font-size: 1.5rem;
 }
 
-.navigation ul li a .title{
+.Dashnavigation ul li a .Sidetitle{
 
   position: relative;
   display: block;
@@ -151,8 +151,8 @@ body{
 }
 
 /* curve outside*/
-.navigation ul li:hover a::before,
-.navigation ul li.hovered a::before{
+.Dashnavigation ul li:hover a::before,
+.Dashnavigation ul li.hovered a::before{
 
     content: '';
     position: absolute;
@@ -165,8 +165,8 @@ body{
     box-shadow: 35px 35px 0 10px var(--white);
     pointer-events: none;
 }
-.navigation ul li:hover a::after,
-.navigation ul li.hovered a::after{
+.Dashnavigation ul li:hover a::after,
+.Dashnavigation ul li.hovered a::after{
     content: '';
     position: absolute;
     right: 0;
@@ -180,7 +180,7 @@ body{
 }
 
 /*main*/
-.main{
+.Dashmain{
 
     position: absolute;
     width: 80.3%;
@@ -190,7 +190,7 @@ body{
     transition: 0.5s;
 }
 
-.main.active{
+.Dashmain.active{
 
     width: 92%;
     left: 80px;
@@ -536,22 +536,22 @@ body{
 
 @media (max-width : 991px){
 
-    .navigation{
+    .Dashnavigation{
 
         left: -300px;
     }
-    .navigation.active{
+    .Dashnavigation.active{
 
         width: 300px;
         left: 0;
     }
-    .main{
+    .Dashmain{
 
         width: 100%;
         left: 0;
     }
 
-    .main.active{
+    .Dashmain.active{
 
       left: 0;
 

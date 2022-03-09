@@ -12,12 +12,12 @@ const Dash = () => {
 
   <div>
 
-   <div class="container">
+   <div class="Dashcontainer">
      
      <SideBar/>
 
   
-    <div class="main">
+    <div class="Dashmain">
     <TopBar/>
     
     <div class="main-content">

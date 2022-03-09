@@ -1,15 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./Signin.css";
 import logo from "./logo.png";
 import User from "../Modals/Cabinet";
-import login from "../Modals/login";
-//import Validation from "../Helpers/Validation";
 import Axios from "axios";
 import { Link } from "react-router-dom";
+import { Login, clearErrorMsg } from "../Redux/Reducers/auth";
+import loginCredentials from "../Modals/login";
+import { Uservalidation, loginvalidation } from "../Helpers/Validation";
+import { useDispatch, useSelector } from "react-redux";
 
 const SignIn = () => {
   // state pour classe CSS
   const [Classe, SetClasse] = useState("");
+
+  // input variables
+
+  const username = useRef();
+  const Psw = useRef();
 
   // state pour user infos
   const [NewUser, setNewUser] = useState(new User());
@@ -19,114 +26,49 @@ const SignIn = () => {
 
   // state for login infos
 
-  const [loginInfo, setLogininfo] = useState(new login());
+  const [loginInfo, setLogininfo] = useState(new loginCredentials());
 
-  const HandelInputChange = (event) => {
-    setNewUser({ ...NewUser, [event.target.name]: event.target.value });
-  };
+  // Dispatch valiable
 
-  const HandelInputChangeLogin = (event) => {
-    setLogininfo({ ...loginInfo, [event.target.name]: event.target.value });
-  };
+  const dispatch = useDispatch();
 
-  // data validation
-  const validation = (e) => {
-    let msg = "";
+  //redux state
+  //const errorServer = useSelector((s) => s.auth.Erreur);
+  const isloading = useSelector((s) => s.auth.isLoading);
+  const userInfo = useSelector((s) => s.auth.userInfo);
+
+  // data validation5
+  const SigninLogic = (e) => {
     e.preventDefault();
 
-    // FirstName
-    if (NewUser.nom.length < 4 || NewUser.nom.length > 20) {
-      setErrorMsg("le nom doit contenir entre 4 et 20 caractéres");
-      msg = "le nom doit contenir entre 4 et 20 caractéres ";
-      return
-    }
+    let msg = loginvalidation(username.current.value, Psw.current.value);
 
-    //LastName
-    if (NewUser.prenom.length < 4 || NewUser.prenom.length > 20) {
-      setErrorMsg("le prénom doit contenir entre 4 et 20 caractéres");
-      msg = "le prénom doit contenir entre 4 et 20 caractéres";
-      return
-    }
-
-    //LastName
-    if (NewUser.login.length < 8) {
-      setErrorMsg("login doit contenir plus de 8 caractéres");
-      msg = "login doit contenir plus de 8 caractéres";
-      return
-    }
-
-    //PassWord
-    let pattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,12}$/;
-
-    if (pattern.test(NewUser.password) === false) {
-      setErrorMsg(
-        "Le mot de passe doit contenir au moin 8 caractéres, une lettre majiscule, une miniscule, un nombre et un caractére spécial"
-      );
-      msg =
-        "Le mot de passe doit contenir au moin 8 caractéres, une lettre majiscule, une miniscule, un nombre et un caractére spécial";
-        return
-      }
-
-    //Username Email
-    let pattern_email =
-      /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
-
-    if (pattern_email.test(NewUser.email) === false) {
-      setErrorMsg("Email doit être commz suit : Example@Example.com");
-      msg = "Email doit être commz suit : Example@Example.com";
-      return
-    }
-
-    var pattern_tel = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-
-    if (pattern_tel.test(NewUser.tel) === false) {
-      setErrorMsg("Vous devez entrer un numero de téléphone valide");
-      msg = "Vous devez entrer un numero de téléphone valide";
-      return
-    }
-
-    if (msg == "") {
-      Axios.post("http://localhost:9000/api/auth/register", NewUser)
-        .then((response) => setErrorMsg(response.data.message))
-        .catch((err) => setErrorMsg(err?.response?.data?.message));
-    }
-  };
-
-  const loginvalidation = (e) => {
-    let msg = "";
-
-    e.preventDefault();
-
-     //LastName
-     if (loginInfo.log.length < 8) {
-      setErrorMsg("login doit contenir plus de 8 caractéres");
-      msg = "login doit contenir plus de 8 caractéres";
-      return
-    }
-
-    //PassWord
-    let pattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,12}$/;
-
-    if (pattern.test(loginInfo.password) === false) {
-      setErrorMsg(
-        "Le mot de passe doit contenir au moin 8 caractéres, une lettre majiscule, une miniscule, un nombre et un caractére spécial"
-      );
-      msg =
-        "Le mot de passe doit contenir au moin 8 caractéres, une lettre majiscule, une miniscule, un nombre et un caractére spécial";
-        return
-      }
-
-   
+    setErrorMsg(msg);
 
     if (msg === "") {
-      Axios.post(
-        `http://localhost:9000/api/Signin/${loginInfo.log}/pass/${loginInfo.password}`,
-        loginInfo
-      )
-        .then((response) => setErrorMsg(response.data.message))
-        .catch((err) => setErrorMsg(err?.response?.data?.message));
+      dispatch(Login(username.current.value, Psw.current.value));
+      username.current.value = "";
+      Psw.current.value = "";
     }
   };
+
+  const SignupLogic = (e) => {
+    e.preventDefault();
+
+    if (msg === "");
+  };
+
+  useEffect(()=>{
+
+    if(errorServer !== ""){
+
+      //setErrorMsg(errorServer)
+
+      call(clearErrorMsg());
+
+    }
+
+  }, [errorServer])
 
   return (
     <div>
@@ -137,7 +79,7 @@ const SignIn = () => {
               <h2 class="title">Se connecter</h2>
 
               <div className={ErrorMsg == "" ? "d-none" : "alert alert-danger"}>
-                <span style={{color : "rgb(190, 50, 50)"}}>{ErrorMsg}</span>
+                <span style={{ color: "rgb(190, 50, 50)" }}>{ErrorMsg}</span>
               </div>
 
               <div class="input-field" id="sign">
@@ -145,7 +87,7 @@ const SignIn = () => {
                 <input
                   type="text"
                   placeholder="Nom d'utilisateur"
-                  name="log"
+                  ref={username}
                   onFocus={() => setErrorMsg("")}
                   onChange={HandelInputChangeLogin}
                 />
@@ -155,7 +97,7 @@ const SignIn = () => {
                 <input
                   type="password"
                   placeholder="Mot de passe"
-                  name="password"
+                  ref={Psw}
                   onFocus={() => setErrorMsg("")}
                   onChange={HandelInputChangeLogin}
                 />
@@ -184,9 +126,8 @@ const SignIn = () => {
             <form action="" class="sign-up-form" onSubmit={validation}>
               <h2 class="title">S'inscrire</h2>
 
-              
               <div className={ErrorMsg == "" ? "d-none" : "alert alert-danger"}>
-              <span style={{color : "rgb(190, 50, 50)"}}>{ErrorMsg}</span>
+                <span style={{ color: "rgb(190, 50, 50)" }}>{ErrorMsg}</span>
               </div>
 
               <div class="input-field">
