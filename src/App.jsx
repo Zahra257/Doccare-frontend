@@ -15,8 +15,6 @@ const App = ()=> {
 
   return (
 
-    <div className="App">
-
      
 
       <Provider store={store}>
@@ -26,8 +24,6 @@ const App = ()=> {
      </Provider>
 
    
-         
-    </div>
 
   )
 }

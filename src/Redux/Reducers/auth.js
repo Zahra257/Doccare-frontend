@@ -1,14 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import loginCredentials from "../../Modals/login";
+import axios from "axios";
 
 export const Login = createAsyncThunk(
 
   "auth/login",
   async({username, password},{RejectedWithValue, FulfillwithValue}) =>{
 
-    return axios.post("", new loginCredentials(username, password))
+
+    return axios.post(`http://localhost:9000/api/Signin/${username}/pass/${password}`, new loginCredentials(username, password))
     .then((Response) => FulfillwithValue(Response.data))
-    .catch((err)=> RejectedWithValue(err.Response.data.error.message))
+    .catch((err)=> RejectedWithValue(err.message))
   }
 )
 

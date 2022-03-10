@@ -33,23 +33,29 @@ const SignIn = () => {
   const dispatch = useDispatch();
 
   //redux state
-  //const errorServer = useSelector((s) => s.auth.Erreur);
-  const isloading = useSelector((s) => s.auth.isLoading);
-  const userInfo = useSelector((s) => s.auth.userInfo);
+  const errorServer = useSelector(state => state.Erreur);
+  const isloading = useSelector(state => state.isLoading);
+  const userInfo = useSelector(state => state.userInfo);
 
-  // data validation5
+  // data validation
   const SigninLogic = (e) => {
     e.preventDefault();
 
-    let msg = loginvalidation(username.current.value, Psw.current.value);
+    let msg = "";
+    if(loginvalidation(username.current.value, Psw.current.value))
+    msg = loginvalidation(username.current.value, Psw.current.value);
+
+    console.log("")
 
     setErrorMsg(msg);
 
     if (msg === "") {
-      dispatch(Login(username.current.value, Psw.current.value));
+      dispatch(Login({username : username.current.value,password : Psw.current.value}));
       username.current.value = "";
       Psw.current.value = "";
     }
+
+    console.log(userInfo)
   };
 
   const SignupLogic = (e) => {
@@ -62,11 +68,12 @@ const SignIn = () => {
 
     if(errorServer !== ""){
 
-      //setErrorMsg(errorServer)
+      setErrorMsg(errorServer)
 
-      call(clearErrorMsg());
+      //dispatch(clearErrorMsg());
 
     }
+
 
   }, [errorServer])
 
@@ -75,7 +82,7 @@ const SignIn = () => {
       <div className={`container ${Classe}`}>
         <div class="forms-container">
           <div className="signin-signup">
-            <form action="" className="sign-in-form" onSubmit={loginvalidation}>
+            <form action="" className="sign-in-form" onSubmit={SigninLogic}>
               <h2 class="title">Se connecter</h2>
 
               <div className={ErrorMsg == "" ? "d-none" : "alert alert-danger"}>
@@ -89,7 +96,6 @@ const SignIn = () => {
                   placeholder="Nom d'utilisateur"
                   ref={username}
                   onFocus={() => setErrorMsg("")}
-                  onChange={HandelInputChangeLogin}
                 />
               </div>
               <div class="input-field" id="sign">
@@ -99,7 +105,6 @@ const SignIn = () => {
                   placeholder="Mot de passe"
                   ref={Psw}
                   onFocus={() => setErrorMsg("")}
-                  onChange={HandelInputChangeLogin}
                 />
               </div>
               <Link to="/ForgottenPassword">
@@ -123,7 +128,7 @@ const SignIn = () => {
               <div class="social-media"></div>
             </form>
 
-            <form action="" class="sign-up-form" onSubmit={validation}>
+            <form action="" class="sign-up-form">
               <h2 class="title">S'inscrire</h2>
 
               <div className={ErrorMsg == "" ? "d-none" : "alert alert-danger"}>
@@ -137,7 +142,7 @@ const SignIn = () => {
                   placeholder="Nom"
                   name="nom"
                   onFocus={() => setErrorMsg("")}
-                  onChange={HandelInputChange}
+                  
                 />
               </div>
 
@@ -148,7 +153,7 @@ const SignIn = () => {
                   placeholder="Prénom"
                   name="prenom"
                   onFocus={() => setErrorMsg("")}
-                  onChange={HandelInputChange}
+                 
                 />
               </div>
 
@@ -159,7 +164,7 @@ const SignIn = () => {
                   placeholder="Spécialité"
                   name="specialite"
                   onFocus={() => setErrorMsg("")}
-                  onChange={HandelInputChange}
+                
                 />
               </div>
 
@@ -170,7 +175,7 @@ const SignIn = () => {
                   placeholder="CIN"
                   name="CIN"
                   onFocus={() => setErrorMsg("")}
-                  onChange={HandelInputChange}
+                
                 />
               </div>
 
@@ -181,7 +186,7 @@ const SignIn = () => {
                   placeholder="Adresse"
                   name="adresse"
                   onFocus={() => setErrorMsg("")}
-                  onChange={HandelInputChange}
+                 
                 />
               </div>
 
@@ -192,7 +197,7 @@ const SignIn = () => {
                   placeholder="Tel du cabinet"
                   name="Tel"
                   onFocus={() => setErrorMsg("")}
-                  onChange={HandelInputChange}
+                 
                 />
               </div>
 
@@ -203,7 +208,7 @@ const SignIn = () => {
                   placeholder="Email du cabinet"
                   name="email"
                   onFocus={() => setErrorMsg("")}
-                  onChange={HandelInputChange}
+                
                 />
               </div>
 
@@ -214,7 +219,7 @@ const SignIn = () => {
                   placeholder="Login"
                   name="login"
                   onFocus={() => setErrorMsg("")}
-                  onChange={HandelInputChange}
+                
                 />
               </div>
 
@@ -225,7 +230,7 @@ const SignIn = () => {
                   placeholder="Mot de passe"
                   name="password"
                   onFocus={() => setErrorMsg("")}
-                  onChange={HandelInputChange}
+                 
                 />
               </div>
 

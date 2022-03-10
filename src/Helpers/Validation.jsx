@@ -20,8 +20,7 @@ export const Uservalidation = (e) =>{
   let pattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,12}$/;
 
   if (pattern.test(NewUser.password) === false) {
-    return
-      "Le mot de passe doit contenir au moin 8 caractéres, une lettre majiscule, une miniscule, un nombre et un caractére spécial";
+    return "Le mot de passe doit contenir au moin 8 caractéres, une lettre majiscule, une miniscule, un nombre et un caractére spécial";
     }
 
   //Username Email
@@ -56,8 +55,7 @@ export const loginvalidation = (username, password) => {
   let pattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,12}$/;
 
   if (pattern.test(password) === false) {
-   return
-      "Le mot de passe doit contenir au moin 8 caractéres, une lettre majiscule, une miniscule, un nombre et un caractére spécial";
+   return "Le mot de passe doit contenir au moin 8 caractéres, une lettre majiscule, une miniscule, un nombre et un caractére spécial";
     }
 
 }
