@@ -6,16 +6,16 @@ const Orders = () => {
   
   <div class="recentOrder">
             <div class="cardHeader">
-             <h2>Recent Orders</h2>
-             <a href="#" class="btn">View All</a>
+             <h2>Liste d'attente</h2>
+             <a href="#" class="">View All</a>
             </div>
              <table>
                  <thead>
                      <tr>
-                         <td>Name</td>
-                         <td>Price</td>
-                         <td>Payment</td>
-                         <td>Status</td>
+                         <td>Nom</td>
+                         <td>RDV</td>
+                         <td>Type</td>
+                         <td>Date de naissance</td>
                      </tr>
                  </thead>
                  <tbody>
