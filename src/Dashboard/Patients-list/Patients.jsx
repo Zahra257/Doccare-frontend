@@ -5,7 +5,7 @@ const Patients = () => {
 
 <div class="recentCustomers">
            <div class="cardHeader">
-             <h2>Patient Recent</h2>
+             <h2>Patient Recents</h2>
            </div>
            <table>
                <tr>
