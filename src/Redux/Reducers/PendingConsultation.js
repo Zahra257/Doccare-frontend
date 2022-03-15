@@ -4,6 +4,7 @@ import axios from "axios";
 export const getListConsultation = createAsyncThunk(
   "PendingConsultation/getListConsultation",
   async ({ id }, { rejectWithValue, fulfillWithValue }) => {
+  
     return axios
       .get(`http://localhost:9000/api/Doctor/DashboardList/id/${id}`)
       .then(response => fulfillWithValue(response.data.listCons))
