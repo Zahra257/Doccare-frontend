@@ -3,16 +3,16 @@ import axios from "axios";
 
 export const getListConsultation = createAsyncThunk(
   "PendingConsultation/getListConsultation",
-  async ({ id }) => {
+  async ({ id }, { rejectWithValue, fulfillWithValue }) => {
     return axios
       .get(`http://localhost:9000/api/Doctor/DashboardList/id/${id}`)
-      .then((res) => res.json())
+      .then(response => fulfillWithValue(response.data.listCons))
       .catch((err) => console.log(err.message));
   }
 );
 
 const ListDashSlice = createSlice({
-  name: PendingConsultation,
+  name: "PendingConsultation",
   initialState: {
     List: [],
     Status: null,
@@ -23,7 +23,7 @@ const ListDashSlice = createSlice({
       state.Status = "Loading";
     },
 
-    [getListConsultation.fulfilled]: (state, { payload }) => {
+    [getListConsultation.fulfilled]: (state, {payload}) => {
       state.List = payload;
       state.Status = "Success";
     },
@@ -34,3 +34,5 @@ const ListDashSlice = createSlice({
     
   },
 });
+
+export default ListDashSlice.reducer

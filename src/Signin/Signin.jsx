@@ -50,7 +50,7 @@ const SignIn = () => {
     setErrorMsg(msg);
 
     if (msg === "") {
-      dispatch(Login({username : username.current.value,password : Psw.current.value}));
+      dispatch(Login({username : username.current.value, password : Psw.current.value}));
       username.current.value = "";
       Psw.current.value = "";
     }

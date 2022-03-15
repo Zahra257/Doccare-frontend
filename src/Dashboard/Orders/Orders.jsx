@@ -1,7 +1,27 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import { getListConsultation } from '../../Redux/Reducers/PendingConsultation';
+import {useDispatch, useSelector} from 'react-redux'
 
 const Orders = () => {
 
+    const Dispatch = useDispatch();
+
+
+    
+ useEffect (() => {
+
+    Dispatch(getListConsultation({id : 16}))
+
+ }, [Dispatch])
+
+ const consultations = useSelector((state) => state.DashList.List)
+
+ console.log(consultations)
+
+ 
+
+
+ 
   return <div>
   
   <div class="recentOrder">
