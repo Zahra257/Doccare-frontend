@@ -1,47 +1,50 @@
-import React from 'react';
-import SideBar from '../Theme/sideBar/SideBar';
-import TopBar from '../Theme/topBar/TopBar';
-import Cardbox from './Cardbox/Cardbox';
-import './Dash.css'
-import Orders from './Orders/Orders';
-import Patients from './Patients-list/Patients';
+import React, { useEffect } from "react";
+import SideBar from "../Theme/sideBar/SideBar";
+import TopBar from "../Theme/topBar/TopBar";
+import Cardbox from "./Cardbox/Cardbox";
+import "./Dash.css";
+import Orders from "./Orders/Orders";
+import Patients from "./Patients-list/Patients";
+
+import  PatienInfo  from "./PatientInfo/PatienInfo";
+import { getListConsultation } from "../Redux/Reducers/PendingConsultation";
+import { useDispatch, useSelector } from "react-redux";
 
 const Dash = () => {
 
-  return(
+  const Dispatch = useDispatch();
 
-  <div>
+  useEffect(() => {
+    Dispatch(getListConsultation({ id: 16 }));
+  }, [Dispatch]);
 
-   <div class="Dashcontainer">
-     
-     <SideBar/>
+  const consultations = useSelector((state) => state.DashList.List);
 
-  
-    <div class="Dashmain">
-    <TopBar/>
-    
-    <div class="main-content">
-    
-    <Cardbox/>
 
-    
+  return (
+    <div>
+      <div class="Dashcontainer">
+        <SideBar />
 
-    <div class="details">
-      
-        <Orders/>
-        <Patients/>
+        <div class="Dashmain">
+          <TopBar />
+          <div class="Content">
+            <div class="main-content">
+              <Cardbox />
 
+              <div class="details">
+                <Orders List = {consultations}/>
+                <Patients  List ={consultations}/>
+              </div>
+            </div>
+            <div class="PatientInfo">
+              <PatienInfo />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-
-</div>
-
-    </div>
-
-</div> 
-
-  </div>
-  )
+  );
 };
 
 export default Dash;

@@ -8,7 +8,7 @@ export const getListConsultation = createAsyncThunk(
     return axios
       .get(`http://localhost:9000/api/Doctor/DashboardList/id/${id}`)
       .then(response => fulfillWithValue(response.data.listCons))
-      .catch((err) => console.log(err.message));
+      .catch((err) => rejectWithValue(err.data.message));
   }
 );
 
@@ -17,8 +17,16 @@ const ListDashSlice = createSlice({
   initialState: {
     List: [],
     Status: null,
+    Erreur : ""
   },
+   
+  AddPatient(){
 
+  },
+  DeletePatien(){
+
+
+  },
   extraReducers: {
     [getListConsultation.pending]: (state, action) => {
       state.Status = "Loading";
@@ -29,8 +37,9 @@ const ListDashSlice = createSlice({
       state.Status = "Success";
     },
     
-    [getListConsultation.rejected]: (state, action) => {
+    [getListConsultation.rejected]: (state, {payload}) => {
         state.Status = "Failed";
+        state.Erreur = payload;
       }
     
   },

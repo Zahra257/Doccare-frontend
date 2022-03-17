@@ -2,7 +2,6 @@ import React from 'react';
 import SideBar from '../Theme/sideBar/SideBar';
 import TopBar from '../Theme/topBar/TopBar';
 import Cardbox from './Cardbox/Cardbox';
-import './DashAssistante.css'
 import Orders from './Orders/Orders';
 import Patients from './Patients-list/Patients';
 
