@@ -6,7 +6,7 @@ const PatienInfo = ({List}) => {
     <div>
         
         <div class="imgBx">
-          <img src="C:\Users\user\Desktop\Doccare\Front-end\doccare-front\src\Dashboard\PatientInfo\user.jpg" />
+          <img src= {user} />
         </div>
         <span class="Name">
           <h4>Imane Guennach</h4>
