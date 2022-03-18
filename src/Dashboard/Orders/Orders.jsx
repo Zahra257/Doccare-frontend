@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 
-const Orders = ({List}) => {
-  
-
+const Orders = ({ List }) => {
   return (
     <div>
       <div class="recentOrder">
@@ -24,16 +22,14 @@ const Orders = ({List}) => {
           <tbody>
             {List.map((item) => (
               <tr>
-                <td>{item.Nom + ' ' + item.Prénom } </td>
+                <td>{item.Nom + " " + item.Prénom} </td>
                 <td>{item.Heure}</td>
                 <td>{item.Type}</td>
                 <td>
-                  <span class="status delivered">{item.Date }</span>
+                  <span class="status delivered">{item.Date}</span>
                 </td>
               </tr>
             ))}
-
-            
           </tbody>
         </table>
       </div>

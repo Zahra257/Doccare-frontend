@@ -10,22 +10,20 @@ import store from './Redux/Store/index';
 
 
 
-
 const App = ()=> {
 
   return (
+   <div>
 
-     
-
-      <Provider store={store}>
+<Provider store={store}>
   
-     <AppRoutes/>
+  <AppRoutes/>
 
-     </Provider>
-
+  </Provider>
    
-
-  )
+ 
+ </div>
+ )
 }
 
 export default App

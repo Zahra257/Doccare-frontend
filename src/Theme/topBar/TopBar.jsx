@@ -1,11 +1,15 @@
 import React from 'react';
 
-const TopBar = () => {
+const TopBar = ({Change, classe}) => {
   return <div>
 
 <div class="topbar">
         <div class="toggle">
-            <ion-icon name="menu"></ion-icon>
+            <ion-icon name="menu" onClick = { 
+                
+                () => Change()
+
+            }></ion-icon>
         </div>
        
         <div class="search">

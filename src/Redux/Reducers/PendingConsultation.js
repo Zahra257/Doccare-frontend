@@ -27,6 +27,8 @@ const ListDashSlice = createSlice({
 
 
   },
+
+  
   extraReducers: {
     [getListConsultation.pending]: (state, action) => {
       state.Status = "Loading";

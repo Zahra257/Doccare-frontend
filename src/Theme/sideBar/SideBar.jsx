@@ -1,12 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import logo from "./logo.png";
 import text from "./text.png";
 
-const SideBar = () => {
+const SideBar = ( {classe}) => {
 
   return <div>
 
-    <div class="Dashnavigation">
+    <div class= {`Dashnavigation ${classe}`}>
         <ul>
             <li>
                 <a href="#">
@@ -24,7 +25,7 @@ const SideBar = () => {
                 <a href="#">
                     <span class="icon"><ion-icon name="people-outline"></ion-icon>
                     </span>
-                    <span class="Sidetitle">Custumers</span>
+                   <Link to="/PaientsList"> <span class="Sidetitle">Patients</span> </Link>
                 </a>
             </li>
             <li>
