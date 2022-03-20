@@ -1,29 +1,16 @@
-
-import Dash from './Dashboard/Dash'
-import ForgottenPass from './ForgottenPass/ForgottenPass'
-import Resetpass from './Resetpass/Resetpass'
-import AppRoutes from './Routes/AppRoutes'
-import SignIn from './Signin/Signin'
-import { Provider } from "react-redux";
-import store from './Redux/Store/index';
+import AppRoutes from "./Routes/AppRoutes";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 
 
-
-const App = ()=> {
-
+const App = () => {
   return (
-   <div>
+    <div>
 
-<Provider store={store}>
-  
-  <AppRoutes/>
+     <AppRoutes/>
 
-  </Provider>
-   
- 
- </div>
- )
-}
+    </div>
+  );
+};
 
-export default App
+export default App;
