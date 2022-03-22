@@ -1,48 +1,96 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import { getListPatients } from "../Redux/Reducers/Patients";
 import { DataGrid } from "@mui/x-data-grid";
-
-const columns = [
-  { field: "id", headerName: "ID", width: 70 },
-  { field: "firstName", headerName: "First name", width: 130 },
-  { field: "lastName", headerName: "Last name", width: 130 },
-  {
-    field: "age",
-    headerName: "Age",
-    type: "number",
-    width: 90,
-  },
-  {
-    field: "fullName",
-    headerName: "Full name",
-    description: "This column has a value getter and is not sortable.",
-    sortable: false,
-    width: 160,
-    valueGetter: (params) =>
-      `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-  },
-];
-const rows = [
-  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: 99 },
-  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { Edit, Delete, UnfoldMore } from "@material-ui/icons";
 
 const PatientsList = () => {
+  //Redux
+  const Dispatch = useDispatch();
+
+  useEffect(() => {
+    Dispatch(getListPatients({ id: 16 }));
+  }, [Dispatch]);
+
+  const patients = useSelector((state) => state.ListPatients.List);
+
+  const columns = [
+    { field: "Nom", headerName: "Nom", width: 130 },
+    { field: "Prénom", headerName: "Prénom", width: 130 },
+    { field: "Civilité", headerName: "Civilité", width: 100 },
+    {
+      field: "Date_naissance",
+      headerName: "Date de naissance",
+      type: "number",
+      width: 150,
+    },
+    {
+      field: "Maladie_traitée",
+      headerName: "Maladie traitée",
+      description: "This column has a value getter and is not sortable.",
+      sortable: false,
+      width: 130,
+    },
+
+    { field: "Date_creation", headerName: "Date d'inscription", width: 150 },
+
+    {
+      field: "Edit",
+      headerName: "",
+      width: 50,
+      renderCell: (params) => {
+        return (
+          <>
+            <Edit />
+          </>
+        );
+      },
+    },
+    {
+      field: "Delete",
+      headerName: "",
+      width: 50,
+      renderCell: (params) => {
+        return (
+          <>
+            <Delete />
+          </>
+        );
+      },
+    },
+
+    {
+      field: "UnfoldMore",
+      headerName: "",
+      width: 50,
+      renderCell: (params) => {
+        return (
+          <>
+            <UnfoldMore />
+          </>
+        );
+      },
+    },
+  ];
+
+  const rows = patients;
+  console.log(rows);
+
   return (
-    <div>
-      <div style={{ height: 400, width: "100%" }}>
+    <div class="Lists">
+      <div
+        style={{
+          height: "100vh",
+          width: "100%",
+          margin: "110px 10px 10px 10px",
+        }}
+      >
         <DataGrid
+          getRowId={(row) => row.Id}
           rows={rows}
           columns={columns}
-          pageSize={8}
-          rowsPerPageOptions={[5]}
+          pageSize={25}
+          rowsPerPageOptions={[8]}
           checkboxSelection
         />
       </div>

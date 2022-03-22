@@ -38,19 +38,28 @@ const SideBar = ({ classe }) => {
           <li>
             <a href="#">
               <span class="icon">
-                <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+                <ion-icon name="help-circle-outline"></ion-icon>
               </span>
-              <span class="Sidetitle">Message</span>
+              <span class="Sidetitle">Consultations</span>
             </a>
           </li>
           <li>
             <a href="#">
               <span class="icon">
-                <ion-icon name="help-circle-outline"></ion-icon>
+                <ion-icon name="lock-closed-outline"></ion-icon>
               </span>
-              <span class="Sidetitle">Help</span>
+              <span class="Sidetitle">Assistantes</span>
             </a>
           </li>
+          <li>
+            <a href="#">
+              <span class="icon">
+                <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+              </span>
+              <span class="Sidetitle">Message</span>
+            </a>
+          </li>
+          
           <li>
             <a href="#">
               <span class="icon">
@@ -59,14 +68,7 @@ const SideBar = ({ classe }) => {
               <span class="Sidetitle">Settings</span>
             </a>
           </li>
-          <li>
-            <a href="#">
-              <span class="icon">
-                <ion-icon name="lock-closed-outline"></ion-icon>
-              </span>
-              <span class="Sidetitle">Password</span>
-            </a>
-          </li>
+
           <li>
             <a href="#">
               <span class="icon">
