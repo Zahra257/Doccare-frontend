@@ -3,8 +3,11 @@ import { getListPatients } from "../Redux/Reducers/Patients";
 import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import { Edit, Delete, UnfoldMore } from "@material-ui/icons";
+import { Button } from "@mui/material";
+import CustomizedDialogs from "./AddPatient/AddDialog";
+import AddPatient from './AddPatient/AddPatient';
 
-const PatientsList = () => {
+const PatientsList = (props) => {
   //Redux
   const Dispatch = useDispatch();
 
@@ -41,7 +44,7 @@ const PatientsList = () => {
       renderCell: (params) => {
         return (
           <>
-            <Edit />
+            <CustomizedDialogs Type = {<Edit/>}/>
           </>
         );
       },
@@ -72,17 +75,33 @@ const PatientsList = () => {
       },
     },
   ];
-
+ 
   const rows = patients;
   console.log(rows);
 
   return (
     <div class="Lists">
+      
+      <div class = "AddBtn">
+      <h2>Liste des patients</h2>
+     { /*<Button variant="contained" style = {{backgroundColor: "#4f79ff", fontSize: "18px",borderRadius : "80px", boxShadow: "none"}}>
+        +
+  </Button>*/}
+
+    
+      <CustomizedDialogs Type ="+" >
+
+        <AddPatient/>
+
+    </CustomizedDialogs>
+
+      </div>
+     
       <div
         style={{
           height: "100vh",
           width: "100%",
-          margin: "110px 10px 10px 10px",
+          margin: "30px 10px 10px 10px",
         }}
       >
         <DataGrid
@@ -92,6 +111,7 @@ const PatientsList = () => {
           pageSize={25}
           rowsPerPageOptions={[8]}
           checkboxSelection
+          disableSelectionOnClick
         />
       </div>
     </div>

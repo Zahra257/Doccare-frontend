@@ -2,6 +2,8 @@ import {configureStore, combineReducers} from '@reduxjs/toolkit'
 import authReducer from '../Reducers/auth';
 import DashListReducer from '../Reducers/PendingConsultation'
 import ListPatientReducer from '../Reducers/Patients'
+import ListConsultationReducer from '../Reducers/ListConsultation'
+import ListAssistantesReducer from '../Reducers/Assistante'
 
 const store = configureStore({ 
 
@@ -9,8 +11,10 @@ const store = configureStore({
 
         SigninR : authReducer,
         DashList : DashListReducer,
-        ListPatients : ListPatientReducer       
-       
+        ListPatients : ListPatientReducer,   
+        ListConsultation : ListConsultationReducer,
+        ListAssistantes : ListAssistantesReducer   
+
     }
 
 })

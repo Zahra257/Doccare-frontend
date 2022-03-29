@@ -1,21 +1,20 @@
-import React,{useEffect} from 'react'
-import { getListAllConsultations } from '../Redux/Reducers/ListConsultation'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useEffect } from "react";
+import { getListAssistantes } from "../Redux/Reducers/Assistante";
 import { DataGrid } from "@mui/x-data-grid";
+import { useDispatch, useSelector } from "react-redux";
 import { Edit, Delete, UnfoldMore } from "@material-ui/icons";
+import { Button } from "@mui/material";
 
-
-const Consultations = () => {
-
+const Assistante = () => {
   //Redux
   const Dispatch = useDispatch();
 
   useEffect(() => {
-    Dispatch(getListAllConsultations({ id: 16 }));
+    Dispatch(getListAssistantes({ id: 16 }));
   }, [Dispatch]);
 
-  const Consultations = useSelector((state) => state.ListConsultation.List);
-  console.log(Consultations)
+  const Assistantes = useSelector((state) => state.ListAssistantes.List);
+  console.log(Assistantes);
 
   const columns = [
     { field: "Nom", headerName: "Nom", width: 130 },
@@ -76,31 +75,45 @@ const Consultations = () => {
     },
   ];
 
-  const rows = Consultations;
+  const rows = Assistantes;
   console.log(rows);
 
-  
   return (
-    <div  class="Lists">
-       <div
-        style={{
-          height: "100vh",
-          width: "100%",
-          margin: "110px 10px 10px 10px",
-        }}
-      >
-        <DataGrid
-          getRowId={(row) => row.Id}
-          rows={rows}
-          columns={columns}
-          pageSize={25}
-          rowsPerPageOptions={[8]}
-          checkboxSelection
-          disableSelectionOnClick
-        />
+    <div>
+      <div class="Lists">
+        <div class="AddBtn">
+          <Button
+            variant="contained"
+            style={{
+              backgroundColor: "#4f79ff",
+              fontSize: "18px",
+              boxShadow: "none",
+            }}
+          >
+            +
+          </Button>
+        </div>
+
+        <div
+          style={{
+            height: "100vh",
+            width: "100%",
+            margin: "40px 10px 10px 10px",
+          }}
+        >
+          <DataGrid
+            getRowId={(row) => row.Id}
+            rows={rows}
+            columns={columns}
+            pageSize={25}
+            rowsPerPageOptions={[8]}
+            checkboxSelection
+            disableSelectionOnClick
+          />
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Consultations
+export default Assistante;

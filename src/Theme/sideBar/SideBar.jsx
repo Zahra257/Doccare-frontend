@@ -36,20 +36,22 @@ const SideBar = ({ classe }) => {
             </Link>
           </li>
           <li>
-            <a href="#">
-              <span class="icon">
-                <ion-icon name="help-circle-outline"></ion-icon>
-              </span>
-              <span class="Sidetitle">Consultations</span>
-            </a>
+            <Link to="/ListConsultations">
+              <a href="#">
+                <span class="icon">
+                  <ion-icon name="help-circle-outline"></ion-icon>
+                </span>
+                <span class="Sidetitle">Consultations</span>
+              </a>
+            </Link>
           </li>
           <li>
-            <a href="#">
+          <Link to="/ListAssistante">
               <span class="icon">
                 <ion-icon name="lock-closed-outline"></ion-icon>
               </span>
               <span class="Sidetitle">Assistantes</span>
-            </a>
+              </Link>
           </li>
           <li>
             <a href="#">
@@ -59,7 +61,7 @@ const SideBar = ({ classe }) => {
               <span class="Sidetitle">Message</span>
             </a>
           </li>
-          
+
           <li>
             <a href="#">
               <span class="icon">

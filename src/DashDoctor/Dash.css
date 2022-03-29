@@ -269,6 +269,15 @@ body {
   margin-bottom: 20px;
 }
 
+.AddBtn{
+   display: flex;
+   position : relative;
+   margin-top: 60px;
+   padding: 15px;
+   justify-content: space-between;
+ 
+}
+
 .Name h5 {
   color: var(--black2);
 }
@@ -377,6 +386,14 @@ body {
 .cardHeader h2 {
   font-weight: 600;
   color: var(--blue);
+}
+
+.Lists h2{
+
+  font-weight: 600;
+  color: var(--blue);
+
+
 }
 
 .btn {
