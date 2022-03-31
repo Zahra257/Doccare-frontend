@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { getListPatients } from "../Redux/Reducers/Patients";
 import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
-import { Edit, Delete, UnfoldMore } from "@material-ui/icons";
+import { Edit, Delete, UnfoldMore, Add } from "@material-ui/icons";
 import { Button } from "@mui/material";
 import CustomizedDialogs from "./AddPatient/AddDialog";
 import AddPatient from './AddPatient/AddPatient';
@@ -44,7 +44,11 @@ const PatientsList = (props) => {
       renderCell: (params) => {
         return (
           <>
-            <CustomizedDialogs Type = {<Edit/>}/>
+            <CustomizedDialogs Type = "-">
+
+              <AddPatient Row = {params.row}/>
+
+            </CustomizedDialogs>
           </>
         );
       },
@@ -77,7 +81,6 @@ const PatientsList = (props) => {
   ];
  
   const rows = patients;
-  console.log(rows);
 
   return (
     <div class="Lists">

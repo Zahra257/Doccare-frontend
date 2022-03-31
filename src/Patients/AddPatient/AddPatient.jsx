@@ -10,12 +10,15 @@ import Personneinfo from "./Personneinfo";
 import Accountinfo from "./Accountinfo";
 import FicheMedical from "./FicheMedical";
 
-const AddPatient = () => {
-  const steps = [
+const AddPatient = ({Row}) => {
+  const steps = Row ? [
+    "Informations personnelles ",
+    "fiche medicale"
+  ]: [
     "Informations personnelles ",
     "Informations du compte",
     "fiche medicale",
-  ];
+  ]
 
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
@@ -61,7 +64,8 @@ const AddPatient = () => {
   const handleReset = () => {
     setActiveStep(0);
   };
-
+  
+  console.log(Row)
   return (
     <div>
       <Box >
@@ -101,20 +105,20 @@ const AddPatient = () => {
 
               activeStep+1 === 1 &&(
 
-                <Personneinfo/>
+                <Personneinfo row = {Row}/>
               )}
 
               {
               activeStep+1 === 2 &&(
 
-                <FicheMedical/>
+                <FicheMedical row = {Row}/>
               )
 
             }
              {
               activeStep+1 === 3 &&(
 
-                <Accountinfo/>
+                <Accountinfo row = {Row}/>
               )
 
             }

@@ -8,7 +8,7 @@ export const getListConsultation = createAsyncThunk(
     return axios
       .get(`http://localhost:9000/api/Doctor/DashboardList/id/${id}`)
       .then(response => fulfillWithValue(response.data.listCons))
-      .catch((err) => rejectWithValue(err.data.message));
+      .catch((err) =>  rejectWithValue(err.data.message));
   }
 );
 
