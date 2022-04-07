@@ -1,8 +1,11 @@
-import React from "react";
+import React,{useRef} from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
-const Personneinfo = ({row}) => {
+const Personneinfo = ({row, HandelAddPatient}) => {
+
+  
+
   return (
     <div>
       <Box
@@ -13,24 +16,28 @@ const Personneinfo = ({row}) => {
         noValidate
         autoComplete="off"
       >
-        <TextField id="standard-basic" label={row ? row.Nom : "Nom"} variant="standard" />
-        <TextField id="standard-basic" label="Prenom" variant="standard" value= {row ? row.Prénom  : null}/>
-        <TextField id="standard-basic" label="CIN" variant="standard" value= {row ? row.CIN : null}/>
-        <TextField id="standard-basic" label="Civilite" variant="standard" value= {row ? row.Civilité : null}/>
+        <TextField id="standard-basic" label="Nom" name = "Nom" variant="standard"  defaultValue={row ? row.Nom : null}  onChange = {HandelAddPatient} />
+        <TextField id="standard-basic" label="Prenom" name = "prénom" variant="standard" defaultValue= {row ? row.Prénom  : null} onChange = {HandelAddPatient} />
+        <TextField id="standard-basic" label="CIN" name = "CIN" variant="standard" defaultValue= {row ? row.CIN : null} onChange = {HandelAddPatient} />
+        <TextField id="standard-basic" label="Civilite" name = "Civilité" variant="standard" defaultValue= {row ? row.Civilité : null} onChange = {HandelAddPatient} />
         <TextField
           id="standard-basic"
           label="Date de naissance "
           variant="standard"
-          value= {row ? row.Date_naissance : null}
+          name = "Date_naissance"
+          defaultValue= {row ? row.Date_naissance : null}
+          onChange = {HandelAddPatient}
         />
         <TextField
           id="standard-basic"
           label="Situation familiale"
           variant="standard"
-          value= {row ? row.Situation_familiale : null}
+          name = "Situation_familiale"
+          defaultValue= {row ? row.Situation_familiale : null}
+          onChange = {HandelAddPatient}
         />
-        <TextField id="standard-basic" label="Adresse" variant="standard" value= {row ? row.Adresse  : null}/>
-        <TextField id="standard-basic" label="telephone" variant="standard" value= {row ? row.Tel  : null}/>
+        <TextField id="standard-basic" label="Adresse" variant="standard" name = "Adresse" defaultValue= {row ? row.Adresse  : null} onChange = {HandelAddPatient} />
+        <TextField id="standard-basic" label="telephone" variant="standard" name = "Tel" defaultValue= {row ? row.Tel  : null} onChange = {HandelAddPatient} />
       </Box>
     </div>
   );

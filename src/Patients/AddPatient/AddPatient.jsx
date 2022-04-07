@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Stepper from "@mui/material/Stepper";
@@ -9,16 +9,34 @@ import Typography from "@mui/material/Typography";
 import Personneinfo from "./Personneinfo";
 import Accountinfo from "./Accountinfo";
 import FicheMedical from "./FicheMedical";
+import { AddNewPatient } from "../../Redux/Reducers/Patients";
+import { useDispatch, useSelector } from "react-redux";
+import { Patient } from "../../Modals/Patient";
+import { getListPatients } from "../../Redux/Reducers/Patients";
 
-const AddPatient = ({Row}) => {
-  const steps = Row ? [
-    "Informations personnelles ",
-    "fiche medicale"
-  ]: [
-    "Informations personnelles ",
-    "Informations du compte",
-    "fiche medicale",
-  ]
+const AddPatient = ({ Row }) => {
+  const dispatch = useDispatch();
+
+  // State to Add new patient
+
+  useEffect(() => {
+    return dispatch(getListPatients({ id: 16 }));
+  });
+
+  const [newPatient, setNewPatient] = useState(new Patient());
+
+  const handeleChangesPatient = (event) => {
+    setNewPatient({ ...newPatient, [event.target.name]: event.target.value });
+  };
+
+  // Config Gride Material UI
+  const steps = Row
+    ? ["Informations personnelles ", "fiche medicale"]
+    : [
+        "Informations personnelles ",
+        "fiche medicale",
+        "Informations du compte",
+      ];
 
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
@@ -64,11 +82,10 @@ const AddPatient = ({Row}) => {
   const handleReset = () => {
     setActiveStep(0);
   };
-  
-  console.log(Row)
+
   return (
     <div>
-      <Box >
+      <Box>
         <Stepper activeStep={activeStep}>
           {steps.map((label, index) => {
             const stepProps = {};
@@ -91,37 +108,35 @@ const AddPatient = ({Row}) => {
         {activeStep === steps.length ? (
           <React.Fragment>
             <Typography sx={{ mt: 2, mb: 1 }}>
-              Le patient a ete ajoute avec success - you&apos;re finished
+              Le patient a ete ajoute avec success 
             </Typography>
             <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
               <Box sx={{ flex: "1 1 auto" }} />
-              <Button onClick={handleReset}>Reset</Button>
+              <Button onClick={handleReset}>OK</Button>
             </Box>
           </React.Fragment>
         ) : (
           <React.Fragment>
             <Typography sx={{ mt: -0.5, mb: 1 }}>
-            {
-
-              activeStep+1 === 1 &&(
-
-                <Personneinfo row = {Row}/>
+              {activeStep + 1 === 1 && (
+                <Personneinfo
+                  row={Row}
+                  HandelAddPatient={handeleChangesPatient}
+                />
               )}
 
-              {
-              activeStep+1 === 2 &&(
-
-                <FicheMedical row = {Row}/>
-              )
-
-            }
-             {
-              activeStep+1 === 3 &&(
-
-                <Accountinfo row = {Row}/>
-              )
-
-            }
+              {activeStep + 1 === 2 && (
+                <FicheMedical
+                  row={Row}
+                  HandelAddPatient={handeleChangesPatient}
+                />
+              )}
+              {activeStep + 1 === 3 && (
+                <Accountinfo
+                  row={Row}
+                  HandelAddPatient={handeleChangesPatient}
+                />
+              )}
             </Typography>
             <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
               <Button
@@ -139,7 +154,14 @@ const AddPatient = ({Row}) => {
                 </Button>
               )}
 
-              <Button onClick={handleNext}>
+              <Button
+                onClick={() => {
+                  handleNext();
+                  if (activeStep === steps.length - 1)
+                    dispatch(AddNewPatient({ id: 16, newPatient: newPatient }));
+                  //console.log(patients)
+                }}
+              >
                 {activeStep === steps.length - 1 ? "Finish" : "Next"}
               </Button>
             </Box>

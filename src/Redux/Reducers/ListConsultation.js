@@ -19,6 +19,17 @@ const ListConsultationsSlice = createSlice({
     Status: null,
     Erreur : ""
   },
+
+  AddPAtient (){
+   
+
+
+  },
+
+  DeletePatient(){
+
+
+  },
    
   extraReducers: {
     [getListAllConsultations.pending]: (state, action) => {

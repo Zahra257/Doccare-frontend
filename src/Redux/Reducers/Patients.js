@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, isFulfilled } from "@reduxjs/toolkit";
 import axios from "axios";
 import PatientsList from "../../Patients/PatientsList";
 
@@ -14,10 +14,10 @@ export const getListPatients = createAsyncThunk(
 
 export const AddNewPatient = createAsyncThunk(
   "PatientsList/AddNewPatient",
-  async ({ id, newPatient }) => {
+  async ({ id, newPatient}) => {
     return axios
       .post(`http://localhost:9000/api/Doctor/AddPatient/id/${id}`, newPatient)
-      .then((response) => fulfillWithValue(newPatient))
+      .then((response) =>  isFulfilled(newPatient))
       .catch((err) => rejectWithValue(err.data.message));
   }
 );
@@ -37,8 +37,8 @@ const ListPatientsSlice = createSlice({
       state.Status = "loading";
     },
 
-    [AddNewPatient.fulfilled]: (state, {payload}) => {
-      state.List = [...state.List, payload]
+    [AddNewPatient.fulfilled]: (state, action) => {
+      state.List.push(action.payload);
       state.Status = "Success";
     },
 
