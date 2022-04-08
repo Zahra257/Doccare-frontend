@@ -22,6 +22,16 @@ export const AddNewPatient = createAsyncThunk(
   }
 );
 
+export const UpdatePatient = createAsyncThunk(
+  "PatientsList/UpdatePatient",
+  async ({ id, newPatient}) => {
+    return axios
+      .put(`http://localhost:9000/api/Doctor/UpdatePatient/id/${id}`, newPatient)
+      .then((response) =>  isFulfilled(newPatient))
+      .catch((err) => rejectWithValue(err.data.message));
+  }
+);
+
 const ListPatientsSlice = createSlice({
   name: "PatientsList",
   initialState: {
@@ -32,6 +42,22 @@ const ListPatientsSlice = createSlice({
 
   extraReducers: {
 
+
+    //Update Patient
+    [UpdatePatient.pending]: (state, action) => {
+      state.Status = "loading";
+    },
+
+    [UpdatePatient.fulfilled]: (state, action) => {
+      state.Status = "Success";
+    },
+
+    [UpdatePatient.rejected]: (state, {payload}) => {
+      state.Status = "Failed";
+      state.Erreur = payload;
+    },
+    
+    
     //Add Patient
     [AddNewPatient.pending]: (state, action) => {
       state.Status = "loading";

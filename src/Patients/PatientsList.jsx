@@ -82,6 +82,7 @@ const PatientsList = (props) => {
  
   const rows = patients;
 
+
   return (
     <div class="Lists">
       

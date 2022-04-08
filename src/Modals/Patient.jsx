@@ -1,14 +1,14 @@
 export class Patient{
 
 
-    constructor(Nom='', prénom='', Civilité='', CIN='', Date_naissance , Tel ='', Situation_familiale = '', Adresse ='', Email='', Mutuelle = '', Avatar = '',
+    constructor(Nom='', Prénom='', Civilité='', CIN='', Date_naissance , Tel ='', Situation_familiale = '', Adresse ='', Email='', Mutuelle = '', Avatar = '',
     login = '', password = '', Poids = 0, Taille = 0, Maladie_chronique = '', Groupe_sanguin = '', Maladie_infectueuse = '', Allergie = '', 
     Habitude_toxique = '', Chirurgie_antérieure = '', Maladie_héréditaire = '', Autre_antécédants = '', id = null
     
     ){
 
         this.Nom  = Nom ;
-        this.prénom = prénom;
+        this.Prénom = Prénom;
         this.Civilité = Civilité;
         this.CIN = CIN;
         this.Date_naissance  = Date_naissance ;
