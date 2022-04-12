@@ -7,7 +7,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
-import { Edit, Close } from "@material-ui/icons";
+import { Edit, Close, Delete } from "@material-ui/icons";
 import Typography from "@mui/material/Typography";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -23,7 +23,7 @@ const BootstrapDialogTitle = (props) => {
   const { children, onClose, ...other } = props;
 
   return (
-    <DialogTitle sx={{ m: 0, p: 2}} {...other}>
+    <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
       {children}
       {onClose ? (
         <IconButton
@@ -36,7 +36,7 @@ const BootstrapDialogTitle = (props) => {
             color: (theme) => theme.palette.grey[500],
           }}
         >
-        <Close/>
+          <Close />
         </IconButton>
       ) : null}
     </DialogTitle>
@@ -58,32 +58,28 @@ const CustomizedDialogs = ({ children, Type }) => {
     setOpen(false);
   };
 
-
   return (
     <div>
-      
       {Type === "+" && (
         <Button variant="outlined" onClick={handleClickOpen}>
           +
         </Button>
       )}
 
-      {Type === "-" && (
+      {Type === "-" && <Edit onClick={handleClickOpen} />}
 
-        <Edit onClick={handleClickOpen}/>
-        
-      )}
+      {Type === "=" && <Delete onClick={handleClickOpen} />}
 
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
       >
-        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}/>
-  
-      
-        
-        
+        <BootstrapDialogTitle
+          id="customized-dialog-title"
+          onClose={handleClose}
+        />
+
         <DialogContent dividers>{children}</DialogContent>
       </BootstrapDialog>
     </div>

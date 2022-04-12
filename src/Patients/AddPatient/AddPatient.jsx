@@ -20,49 +20,41 @@ const AddPatient = ({ Row }) => {
   // State to Add new patient
 
   useEffect(() => {
-  
     return dispatch(getListPatients({ id: 16 }));
-    
   });
-
-
 
   const [newPatient, setNewPatient] = useState(new Patient());
 
   useEffect(() => {
-
-    if(Row)
-    setNewPatient({
-      Nom : Row.Nom ,
-      Prénom : Row.Prénom,
-      Civilité : Row.Civilité,
-      CIN : Row.CIN,
-      Date_naissance  : Row.Date_naissance ,
-      Tel  : Row.Tel ,
-      Situation_familiale : Row.Situation_familiale,
-      Adresse   : Row.Adresse  ,
-      Email  : Row.Email ,
-      Mutuelle  : Row.Mutuelle ,
-      Avatar   :  Row.Avatar  ,
-      Poids  :  	Row.Poids,
-      Taille  : Row.Taille ,
-      Maladie_chronique : Row.Maladie_chronique,
-      Groupe_sanguin : Row.Groupe_sanguin,
-      Maladie_infectueuse   : Row.Maladie_infectueuse  ,
-      Allergie    :Row.Allergie  ,
-      Habitude_toxique  : Row.Habitude_toxique ,
-      Chirurgie_antérieure   : Row.Chirurgie_antérieure ,
-      Maladie_héréditaire   : Row.Maladie_héréditaire  ,
-      Autre_antécédants  : Row.Autre_antécédants ,
-    })
-    
-  },[setNewPatient]);
-
+    if (Row)
+      setNewPatient({
+        Nom: Row.Nom,
+        Prénom: Row.Prénom,
+        Civilité: Row.Civilité,
+        CIN: Row.CIN,
+        Date_naissance: Row.Date_naissance,
+        Tel: Row.Tel,
+        Situation_familiale: Row.Situation_familiale,
+        Adresse: Row.Adresse,
+        Email: Row.Email,
+        Mutuelle: Row.Mutuelle,
+        Avatar: Row.Avatar,
+        Poids: Row.Poids,
+        Taille: Row.Taille,
+        Maladie_chronique: Row.Maladie_chronique,
+        Groupe_sanguin: Row.Groupe_sanguin,
+        Maladie_infectueuse: Row.Maladie_infectueuse,
+        Allergie: Row.Allergie,
+        Habitude_toxique: Row.Habitude_toxique,
+        Chirurgie_antérieure: Row.Chirurgie_antérieure,
+        Maladie_héréditaire: Row.Maladie_héréditaire,
+        Autre_antécédants: Row.Autre_antécédants,
+      });
+  }, [setNewPatient]);
 
   const handeleChangesPatient = (event) => {
     setNewPatient({ ...newPatient, [event.target.name]: event.target.value });
   };
-
 
   // Config Gride Material UI
   const steps = Row
@@ -117,7 +109,6 @@ const AddPatient = ({ Row }) => {
   const handleReset = () => {
     setActiveStep(0);
   };
-   
 
   return (
     <div>
@@ -144,11 +135,13 @@ const AddPatient = ({ Row }) => {
         {activeStep === steps.length ? (
           <React.Fragment>
             <Typography sx={{ mt: 2, mb: 1 }}>
-              Le patient a ete ajoute avec success 
+              {!Row
+                ? "Le patient a été ajoute avec success"
+                : "Le patient a été modifié avec success"}
             </Typography>
             <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
               <Box sx={{ flex: "1 1 auto" }} />
-              <Button onClick={handleReset}>OK</Button>
+              
             </Box>
           </React.Fragment>
         ) : (
@@ -193,13 +186,19 @@ const AddPatient = ({ Row }) => {
               <Button
                 onClick={() => {
                   handleNext();
-                  if (activeStep === steps.length - 1 ){
-                    if(!Row)
-                    dispatch(AddNewPatient({ id: 16, newPatient: newPatient }));
-                    else 
-                    {
-                      console.log(Row)
-                    dispatch(UpdatePatient({ id: Row.Id , newPatient: newPatient }))
+                  if (activeStep === steps.length - 1) {
+                    if (!Row)
+                      dispatch(
+                        AddNewPatient({ id: 16, newPatient: newPatient })
+                      );
+                    else {
+                      //console.log(Row)
+                      dispatch(
+                        UpdatePatient({
+                          id: Row.IdPatient,
+                          newPatient: newPatient,
+                        })
+                      );
                     }
                   }
                   //console.log(patients)

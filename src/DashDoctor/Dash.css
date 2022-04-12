@@ -272,7 +272,7 @@ body {
 .AddBtn{
    display: flex;
    position : relative;
-   margin-top: 60px;
+   margin-top: 20px;
    padding: 15px;
    justify-content: space-between;
  

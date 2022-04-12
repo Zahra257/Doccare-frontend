@@ -16,10 +16,10 @@ const Personneinfo = ({row, HandelAddPatient}) => {
         noValidate
         autoComplete="off"
       >
-        <TextField id="standard-basic" label="Nom" name = "Nom" variant="standard"  defaultValue={row ? row.Nom : null}  onChange = {HandelAddPatient} />
-        <TextField id="standard-basic" label="Prenom" name = "prénom" variant="standard" defaultValue= {row ? row.Prénom  : null} onChange = {HandelAddPatient} />
-        <TextField id="standard-basic" label="CIN" name = "CIN" variant="standard" defaultValue= {row ? row.CIN : null} onChange = {HandelAddPatient} />
-        <TextField id="standard-basic" label="Civilite" name = "Civilité" variant="standard" defaultValue= {row ? row.Civilité : null} onChange = {HandelAddPatient} />
+        <TextField id="standard-basic" label="Nom" name = "Nom" variant="standard"  defaultValue={row ? row.Nom : null}  onChange = {(e) => HandelAddPatient(e)} />
+        <TextField id="standard-basic" label="Prenom" name = "prénom" variant="standard" defaultValue= {row ? row.Prénom  : null} onChange = {(e) => HandelAddPatient(e)} />
+        <TextField id="standard-basic" label="CIN" name = "CIN" variant="standard" defaultValue= {row ? row.CIN : null} onChange = {(e) => HandelAddPatient(e)} />
+        <TextField id="standard-basic" label="Civilite" name = "Civilité" variant="standard" defaultValue= {row ? row.Civilité : null} onChange = {(e) => HandelAddPatient(e)} />
         <TextField
           id="standard-basic"
           label="Date de naissance "

@@ -1,15 +1,22 @@
 import React, { useEffect } from "react";
-import { getListPatients } from "../Redux/Reducers/Patients";
+import { DeletePatient, getListPatients } from "../Redux/Reducers/Patients";
 import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import { Edit, Delete, UnfoldMore, Add } from "@material-ui/icons";
 import { Button } from "@mui/material";
 import CustomizedDialogs from "./AddPatient/AddDialog";
-import AddPatient from './AddPatient/AddPatient';
+import AddPatient from "./AddPatient/AddPatient";
+import Typography from "@mui/material/Typography";
 
 const PatientsList = (props) => {
   //Redux
   const Dispatch = useDispatch();
+
+  useEffect(() => {
+    return Dispatch(getListPatients({ id: 16 }));
+  });
+
+
 
   useEffect(() => {
     Dispatch(getListPatients({ id: 16 }));
@@ -44,10 +51,8 @@ const PatientsList = (props) => {
       renderCell: (params) => {
         return (
           <>
-            <CustomizedDialogs Type = "-">
-
-              <AddPatient Row = {params.row}/>
-
+            <CustomizedDialogs Type="-">
+              <AddPatient Row={params.row} />
             </CustomizedDialogs>
           </>
         );
@@ -60,7 +65,29 @@ const PatientsList = (props) => {
       renderCell: (params) => {
         return (
           <>
-            <Delete />
+            <CustomizedDialogs Type="=">
+            <Typography sx={{ mt: 2, mb: 1 }}>      
+                Vous etes sur que vous voulez supprimer ce patient
+            </Typography>
+            <Button
+                onClick={() => {
+                  
+                  Dispatch(DeletePatient({id : params.row.IdPatient}))
+                  props.onClose()
+                }}
+                  
+                sx={{ ml: 30, mt : 2 }}
+              >
+                Yes
+              </Button>
+              <Button
+                variant="contained"
+                sx={{ ml: 1, mt : 2 }}
+              >
+                No
+              </Button>
+              
+            </CustomizedDialogs>
           </>
         );
       },
@@ -79,28 +106,22 @@ const PatientsList = (props) => {
       },
     },
   ];
- 
-  const rows = patients;
 
+  const rows = patients;
 
   return (
     <div class="Lists">
-      
-      <div class = "AddBtn">
-      <h2>Liste des patients</h2>
-     { /*<Button variant="contained" style = {{backgroundColor: "#4f79ff", fontSize: "18px",borderRadius : "80px", boxShadow: "none"}}>
+      <div class="AddBtn">
+        <h2>Liste des patients</h2>
+        {/*<Button variant="contained" style = {{backgroundColor: "#4f79ff", fontSize: "18px",borderRadius : "80px", boxShadow: "none"}}>
         +
   </Button>*/}
 
-    
-      <CustomizedDialogs Type ="+" >
-
-        <AddPatient/>
-
-    </CustomizedDialogs>
-
+        <CustomizedDialogs Type="+">
+          <AddPatient />
+        </CustomizedDialogs>
       </div>
-     
+
       <div
         style={{
           height: "100vh",
@@ -109,7 +130,7 @@ const PatientsList = (props) => {
         }}
       >
         <DataGrid
-          getRowId={(row) => row.Id}
+          getRowId={(row) => row.IdPatient}
           rows={rows}
           columns={columns}
           pageSize={25}

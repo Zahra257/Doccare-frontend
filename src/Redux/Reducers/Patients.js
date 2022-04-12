@@ -24,10 +24,22 @@ export const AddNewPatient = createAsyncThunk(
 
 export const UpdatePatient = createAsyncThunk(
   "PatientsList/UpdatePatient",
-  async ({ id, newPatient}) => {
+  async ({ id, newPatient}, { rejectWithValue, fulfillWithValue }) => {
+    console.log(newPatient)
     return axios
       .put(`http://localhost:9000/api/Doctor/UpdatePatient/id/${id}`, newPatient)
-      .then((response) =>  isFulfilled(newPatient))
+      .then((response) =>  fulfillWithValue({ id, newPatient}))
+      .catch((err) => rejectWithValue(err.data.message));
+  }
+);
+
+export const DeletePatient = createAsyncThunk(
+  "PatientsList/DeletePatient",
+  async ({id}) => {
+
+    return axios
+      .put(`http://localhost:9000/api/Doctor/DeletePatient/id/${id}`)
+      .then((response) =>  isFulfilled(id))
       .catch((err) => rejectWithValue(err.data.message));
   }
 );
@@ -42,14 +54,34 @@ const ListPatientsSlice = createSlice({
 
   extraReducers: {
 
+    //Delete Patient
+    [DeletePatient.pending]: (state, action) => {
+      state.Status = "loading";
+    },
 
+    [DeletePatient.fulfilled]: (state, action) => {
+      
+      state.List.filter(item => item.IdPatient !== action.payload.id)
+      state.Status = "Success";
+      
+    },
+
+    [DeletePatient.rejected]: (state, {payload}) => {
+      state.Status = "Failed";
+      state.Erreur = payload;
+    },
+
+    
+    
     //Update Patient
     [UpdatePatient.pending]: (state, action) => {
       state.Status = "loading";
     },
 
     [UpdatePatient.fulfilled]: (state, action) => {
+
       state.Status = "Success";
+      
     },
 
     [UpdatePatient.rejected]: (state, {payload}) => {
@@ -64,7 +96,6 @@ const ListPatientsSlice = createSlice({
     },
 
     [AddNewPatient.fulfilled]: (state, action) => {
-      state.List.push(action.payload);
       state.Status = "Success";
     },
 
